@@ -54,7 +54,7 @@ onMounted(() => {
       toggleActions: 'play pause reverse resume',
       start: 'top: 50%',
       end: 'bottom: 20%',
-      markers: true,
+      // markers: true,
     },
   })
 
@@ -68,7 +68,7 @@ onMounted(() => {
       trigger: imagesRefs.value[4],
       start: 'top: 50%',
       end: 'bottom: 20%',
-      markers: true,
+      // markers: true,
       // scrub: true,
       scrub: 0.5,
     },
@@ -84,7 +84,7 @@ onMounted(() => {
       trigger: imagesRefs.value[5],
       start: 'top: 50%',
       end: 'bottom: 200px',
-      markers: true,
+      // markers: true,
       scrub: 0.5,
       pin: true,
     },
@@ -100,7 +100,7 @@ onMounted(() => {
       trigger: imagesRefs.value[6],
       start: 'top center',
       end: 'bottom top',
-      markers: true,
+      // markers: true,
       scrub: 1,
       toggleClass: 'active',
       // 헷갈릴 때 id로 별도 표기
@@ -119,7 +119,7 @@ onMounted(() => {
       trigger: imagesRefs.value[7],
       start: 'top center',
       end: 'bottom 20%',
-      markers: true,
+      // markers: true,
       scrub: 1,
 
       // callBack

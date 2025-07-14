@@ -1,0 +1,40 @@
+header {
+  padding: 10px 20px;
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  z-index: 99;
+}
+
+header h1 {
+  font-weight: 800;
+}
+
+header nav ul {
+  margin-left: 50px;
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+}
+
+header nav a {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+header nav a:hover {
+  color: #fff;
+}
+
+header nav a.active {
+  border-color: #fff;
+  border-style: dashed;
+  color: #fff;
+}

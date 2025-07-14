@@ -227,3 +227,9 @@ address {
   color: inherit;
   letter-spacing: inherit;
 }
+
+html,
+body {
+  background-color: #000;
+  color: #fff;
+}
