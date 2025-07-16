@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+
+const stepCount = 5
+
+const steps = computed(() => Array.from({ length: stepCount }, (_, i) => i + 1))
+</script>
 
 <template>
   <header>
@@ -6,8 +12,9 @@
 
     <nav>
       <ul>
-        <li><RouterLink to="/default" activeClass="active">1</RouterLink></li>
-        <li><RouterLink to="/pin" activeClass="active">2</RouterLink></li>
+        <li v-for="(step, index) in steps" :key="index">
+          <RouterLink :to="`/${step}`" activeClass="active">{{ step }}</RouterLink>
+        </li>
       </ul>
     </nav>
   </header>

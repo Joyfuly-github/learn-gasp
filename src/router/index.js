@@ -1,7 +1,15 @@
-import DefaultView from '@/views/DefaultView.vue'
-import PinView from '@/views/PinView.vue'
-
 import { createRouter, createWebHistory } from 'vue-router'
+
+const stepCount = 5
+
+const steps = Array.from({ length: stepCount }, (_, i) => {
+  const n = i + 1
+  return {
+    path: `/${n}`,
+    name: `step${n}`,
+    component: () => import(`@/views/Step${n}View.vue`),
+  }
+})
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,18 +17,9 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/default',
+      redirect: '/1',
     },
-    {
-      path: '/default',
-      name: 'default',
-      component: DefaultView,
-    },
-    {
-      path: '/pin',
-      name: 'pin',
-      component: PinView,
-    },
+    ...steps,
   ],
 })
 
