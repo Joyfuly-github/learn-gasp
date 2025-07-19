@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const stepCount = 5
+const stepCount = 6
 
 const steps = Array.from({ length: stepCount }, (_, i) => {
   const n = i + 1

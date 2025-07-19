@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 
-const stepCount = 5
+const stepCount = 6
 
 const steps = computed(() => Array.from({ length: stepCount }, (_, i) => i + 1))
 </script>
