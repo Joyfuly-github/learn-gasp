@@ -13,11 +13,11 @@ onMounted(() => {
     xPercent: -100 * (sectionsRefs.value.length - 1),
     ease: 'none',
     scrollTrigger: {
-      trigger: '#parallax__cont',
+      trigger: '#parallax__horizontal',
       pin: true,
       scrub: 1,
       snap: 1 / (sectionsRefs.value.length - 1),
-      end: () => '+=' + document.querySelector('#parallax__cont').offsetWidth,
+      end: () => '+=' + document.querySelector('#parallax__horizontal').offsetWidth,
     },
   })
 })
@@ -25,12 +25,34 @@ onMounted(() => {
 
 <template>
   <main id="parallax__cont">
-    <section
-      v-for="index in 9"
-      :key="index"
-      class="parallax__item"
-      :ref="(el) => (sectionsRefs[index] = el)"
-    >
+    <section class="parallax__item" v-for="index in 2" :key="index">
+      <span class="parallax__item__num">0{{ index }}</span>
+      <figure class="parallax__item__imgWrap">
+        <div
+          class="parallax__item__img"
+          :style="`background-image: url(/images/images0${index}@2.jpg)`"
+        ></div>
+      </figure>
+    </section>
+
+    <div id="parallax__horizontal">
+      <section
+        class="parallax__item"
+        v-for="(section, index) in [3, 4, 5, 6]"
+        :key="index"
+        :ref="(el) => (sectionsRefs[index] = el)"
+      >
+        <span class="parallax__item__num">0{{ section }}</span>
+        <figure class="parallax__item__imgWrap">
+          <div
+            class="parallax__item__img"
+            :style="`background-image: url(/images/images0${section}@2.jpg)`"
+          ></div>
+        </figure>
+      </section>
+    </div>
+
+    <section class="parallax__item" v-for="index in [7, 8]" :key="index">
       <span class="parallax__item__num">0{{ index }}</span>
       <figure class="parallax__item__imgWrap">
         <div
@@ -51,9 +73,9 @@ body {
 
 <style scoped>
 /* parallax__cont */
-#parallax__cont {
+#parallax__horizontal {
   overscroll-behavior: none;
-  width: 900%;
+  width: 400%;
   height: 100vh;
   display: flex;
   flex-wrap: nowrap;
