@@ -1,14 +1,41 @@
 <script setup>
-import { computed } from 'vue'
+import LogoGasp from '@/assets/css/icons/LogoGasp.vue'
+import gsap from 'gsap'
+
+import { computed, onMounted, ref } from 'vue'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const headerRef = ref()
 
 const stepCount = 15
-
 const steps = computed(() => Array.from({ length: stepCount }, (_, i) => i + 1))
+
+onMounted(() => {
+  const showHeader = gsap
+    .from(headerRef.value, {
+      yPercent: -100,
+      duration: 0.5,
+    })
+    .progress(1)
+
+  ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top top',
+    onUpdate: (self) => {
+      self.direction === -1 ? showHeader.play() : showHeader.reverse()
+    },
+  })
+})
 </script>
 
 <template>
-  <header>
-    <h1>GSAP Parallax Effect</h1>
+  <header ref="headerRef">
+    <h1>
+      <small>Learn</small>
+      <LogoGasp :width="50"></LogoGasp>
+    </h1>
 
     <nav>
       <ul>
@@ -20,4 +47,4 @@ const steps = computed(() => Array.from({ length: stepCount }, (_, i) => i + 1))
   </header>
 </template>
 
-<style scoped src="@css/header.css"></style>
+<style scoped src="@css/layout.css"></style>

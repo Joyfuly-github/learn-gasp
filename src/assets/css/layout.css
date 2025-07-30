@@ -1,0 +1,87 @@
+#wrap {
+  position: relative;
+}
+
+/* header */
+header {
+  padding: 16px;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+}
+
+header h1 small {
+  margin-bottom: 5px;
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+header nav ul {
+  font-weight: 600;
+  display: flex;
+  gap: 5px;
+}
+
+header nav a {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  color: #64727d;
+}
+
+header nav a:hover,
+header nav a.active {
+  color: #121212;
+}
+
+header nav a.active {
+  border-color: #121212;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+/* footer */
+footer {
+  padding: 16px;
+  line-height: 2;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 500;
+  color: #878e94;
+}
+
+/* aside */
+aside {
+  /* padding: 16px; */
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  background-color: transparent;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn__code {
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  border: 2px solid #121212;
+  border-radius: 20px;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}

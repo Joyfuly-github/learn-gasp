@@ -1,13 +1,17 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import TheAside from '@/components/common/TheAside.vue'
 
-gsap.registerPlugin(ScrollTrigger)
+import { onMounted, ref } from 'vue'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 const items = Array.from({ length: 9 }, (_, i) => i + 1)
+const sectionRefs = ref([])
 const imagesRefs = ref([])
+const activeIndex = ref(0)
 
 onMounted(() => {
   // 01 gsap
@@ -124,19 +128,19 @@ onMounted(() => {
 
       // callBack
       onEnter: () => {
-        console.log('onEnter')
+        // console.log('onEnter')
       },
 
       onLeave: () => {
-        console.log('onLeave')
+        // console.log('onLeave')
       },
 
       onEnterBack: () => {
-        console.log('onEnterBack')
+        // console.log('onEnterBack')
       },
 
       onLeaveBack: () => {
-        console.log('onLeaveBack')
+        // console.log('onLeaveBack')
       },
 
       onUpdate: (self) => {
@@ -154,49 +158,104 @@ onMounted(() => {
     },
   })
 
-  // for (let i = 0; i < items.length; i++) {
-  //   gsap.to(imagesRefs.value[i], {
-  //     x: 200,
-  //     duration: 1,
-  //     borderRadius: 100,
-  //     rotation: 360,
-  //     scrollTrigger: {
-  //       trigger: imagesRefs.value[i],
-  //     },
-  //   })
-  // }
+  console.log(window.innerHeight)
+
+  // GSAP ScrollTrigger snapTo example 로 다시 구현해보기**
+  ScrollTrigger.create({
+    trigger: '#parallax__cont',
+    start: 'top top',
+    end: () => {
+      // window.innerHeight * items.length
+      document.querySelector('#parallax__cont').innerHeight
+      console.log(document.querySelector('#parallax__cont').innerHeight)
+    },
+    snap: {
+      snapTo: 1 / items.length,
+      duration: 0.5,
+      ease: 'power1.inOut',
+    },
+    scrub: 1,
+    // markers: true,
+  })
+
+  // 페이지 activeIndex 변경
+  sectionRefs.value.forEach((el, index) => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top top',
+      end: 'bottom bottom',
+      // onEnter: () => (activeIndex.value = index),
+      // onLeaveBack: () => (activeIndex.value = index),
+      onEnter: () => console.log('onEnter'),
+      onEnterBack: () => console.log('onEnterBack'),
+      onLeave: () => console.log('onLeave'),
+      onLeaveBack: () => console.log('onLeaveBack'),
+    })
+  })
 })
 </script>
 
 <template>
   <main id="parallax__cont">
-    <section v-for="(item, index) in items" :key="index" class="parallax__item">
-      <span class="parallax__item__num">0{{ item }}</span>
-      <div
-        class="parallax__item__img"
-        :ref="(el) => (imagesRefs[index] = el)"
-        :style="`background-image: url(/images/images0${item}.jpg)`"
-      ></div>
+    <section
+      v-for="(item, index) in items"
+      :key="index"
+      :ref="(el) => (sectionRefs[index] = el)"
+      class="parallax__item"
+    >
+      <div class="parallax__item__img" :ref="(el) => (imagesRefs[index] = el)">
+        <svg
+          width="120"
+          height="120"
+          viewBox="0 0 500 500"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M254.166 0C392.534 0 500 116.3 500 254.092C500 389.601 390.241 500 254.166 500C115.777 500 0 391.906 0 254.092C0 114.032 113.521 0 254.166 0Z"
+            fill="#f2a30f"
+          />
+          <path
+            d="M326 217C326 226.941 317.941 235 308 235C298.059 235 290 226.941 290 217C290 207.059 298.059 199 308 199C317.941 199 326 207.059 326 217Z"
+            fill="black"
+          />
+          <path
+            d="M210 217C210 226.941 201.941 235 192 235C182.059 235 174 226.941 174 217C174 207.059 182.059 199 192 199C201.941 199 210 207.059 210 217Z"
+            fill="black"
+          />
+          <path
+            d="M147 303C172 354 233 355 252 355C271 355 322.311 350.135 353 303"
+            stroke="black"
+            stroke-width="20"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
     </section>
   </main>
+
+  <TheAside :activeIndex="activeIndex"></TheAside>
 </template>
 
 <style scoped>
 /* parallax__cont */
 #parallax__cont {
+  height: auto;
   overflow: hidden;
 }
 
 .parallax__item {
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.parallax__item:nth-child(2n) {
+#parallax__cont > *:nth-child(2n):not(aside) {
   background-color: #222;
   color: #fff;
 }
@@ -210,11 +269,11 @@ onMounted(() => {
 }
 
 .parallax__item__img {
-  width: 10vw;
+  /* width: 10vw;
   height: 10vw;
   background-color: #fff;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 
 .parallax__item__img.active {
