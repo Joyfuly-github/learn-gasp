@@ -14,18 +14,6 @@ const imagesRefs = ref([])
 const activeIndex = ref(0)
 
 onMounted(() => {
-  // activeIndex
-  sectionRefs.value.forEach((el, index) => {
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 50%',
-        end: 'bottom 50%',
-        onUpdate: () => (activeIndex.value = index),
-      },
-    })
-  })
-
   // 01 gsap
   gsap.to(imagesRefs.value[0], {
     x: 200,
@@ -167,6 +155,26 @@ onMounted(() => {
       onToggle: (self) => {
         console.log('onToggle', self.isActive)
       },
+    },
+  })
+
+  //
+  ScrollTrigger.create({
+    trigger: '#parallax__cont',
+    start: 'top top',
+    end: () => {
+      window.innerHeight * items.length
+    },
+    snap: {
+      snapTo: 1 / items.length,
+      duration: 0.5,
+      ease: 'power1.inOut',
+    },
+    scrub: 1,
+    onUpdate: (self) => {
+      const progress = self.progress
+      const index = Math.round(progress * (items.length - 1))
+      if (activeIndex.value !== index) activeIndex.value = index
     },
   })
 })

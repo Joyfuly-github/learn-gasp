@@ -40,7 +40,7 @@ onMounted(() => {
     <nav>
       <ul>
         <li v-for="(step, index) in steps" :key="index">
-          <RouterLink :to="`/${step}`" activeClass="active">{{ step }}</RouterLink>
+          <RouterLink :to="`/${step}`" class="btn" activeClass="active">{{ step }}</RouterLink>
         </li>
       </ul>
     </nav>

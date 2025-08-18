@@ -15,7 +15,7 @@ const activeIndex = computed(() => props.activeIndex + 1)
 
 <template>
   <aside>
-    <button type="button" class="btn__code">
+    <button type="button" class="btn btn__code">
       <FontAwesomeIcon :icon="['fas', 'code']"></FontAwesomeIcon>
       <span class="number">{{ activeIndex }}</span>
     </button>
