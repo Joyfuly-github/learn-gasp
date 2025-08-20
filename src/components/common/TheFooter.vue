@@ -22,5 +22,3 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     <LogoGasp :width="35" :iconColor="'#121212'"></LogoGasp> 를 활용해 구현한 학습 프로젝트입니다.
   </footer>
 </template>
-
-<style scoped src="@css/layout.css"></style>

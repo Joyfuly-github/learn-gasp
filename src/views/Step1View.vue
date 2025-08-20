@@ -12,6 +12,114 @@ const items = Array.from({ length: 9 }, (_, i) => i + 1)
 const sectionRefs = ref([])
 const imagesRefs = ref([])
 const activeIndex = ref(0)
+const steps = [
+  {
+    title: 'GSAP 기본 애니메이션',
+    code: `gsap.to(imagesRefs.value[0] // 적용할 요소, {
+  // x로부터 200이동
+  x: 200,
+  // animaiton 재생시간
+  duration: 1,
+  // 360도 회전시키기
+  rotation: 360,
+})`,
+  },
+  {
+    title: 'Scroll Trigger',
+    code: `gsap.to(imagesRefs.value[1], {
+  x: 200,
+  duration: 1,
+  borderRadius: 100,
+  rotation: 360,
+  scrollTrigger: {
+    trigger: imagesRefs.value[1],
+  },
+})`,
+    content: `ScrollTrigger는 웹 페이지 스크롤 동작에 따라 애니메이션을 제어할 수 있게 해주는 GSAP 플러그인 입니다.`,
+  },
+  {
+    title: 'Toggle Action',
+    code: `
+  gsap.to(imagesRefs.value[2], {
+    x: 200,
+    duration: 1,
+    borderRadius: 100,
+    rotation: 360,
+    scrollTrigger: {
+      trigger: imagesRefs.value[2],
+      // toggleActions: 'onEnter onLeave onEnterBack onLeaveBack',
+      // play, pause, resume, reset, restart, complete, reverse, none
+      toggleActions: 'play pause reverse resume',
+    },
+  })
+    `,
+    content: `toggleAction 주로 4가지 스크롤 이벤트를 기준으로 동작합니다.
+  ㆍ onEnter: 요소가 스크롤 영역에 진입할 때
+  ㆍ onLeave : 요소가 스크롤 영역을 벗어날 때
+  ㆍ onEnterBack : 스크롤이 다시 돌아와서 요소가 스크롤 영역에 진입할 때
+  ㆍ onLeaveBack : 스크롤이 다시 돌아와서 요소가 스크롤 영역을 벗어날 때
+
+
+  스크롤 이벤트에 대해 다음과 같은 동작을 설정할 수 있습니다.
+  ㆍ play : 애니메이션 재생
+  ㆍ pause : 애니메이션 일시정지
+  ㆍ resume : 일시정지된 애니메이션을 재개
+  ㆍ reset : 애니메이션을 초기 상태로 되돌림
+  ㆍ restart : 애니메이션을 처음부터 다시 시작
+  ㆍ complate : 애니메이션을 완료 상태로 즉시 이동
+  ㆍ reverse : 애니메이션 되감기
+  ㆍ none : 아무 동작도 수행하지 않음
+    `,
+  },
+  {
+    title: 'start와 end 속성',
+    code: `gsap.to(imagesRefs.value[3], {
+  x: 200,
+  duration: 1,
+  borderRadius: 100,
+  rotation: 360,
+  scrollTrigger: {
+    trigger: imagesRefs.value[3],
+    toggleActions: 'play pause reverse resume',
+    start: 'top 50%',
+    end: 'bottom 20%',
+    // markers: true,
+  },
+})`,
+    content: `start와 end속성은 스크롤 시 애니메이션의 시작 및 종료 시점을 정의합니다.
+키워드(top, center, bottom), 뷰포트 비율, 픽셀값, 동적 계산 함수 등 다양한 값으로 정의할 수 있습니다.
+
+start: 'top 50%',
+→ 트리거 요소의 상단이 뷰포트 50% 지점에 닿으면 애니메이션이 시작
+
+end: 'bottom 20%'
+→ 트리거 요소의 하단이 뷰포트 하단 20%지점을 넘어가면 애니메이션 종료
+
+markers: true
+→ 위에 정의된 뷰포트 start, end 기준점을 화면에 표시
+`,
+  },
+  {
+    title: 'GSAP 기본 애니메이션',
+    code: 'onMounted(() => { gsap.to(imagesRefs.value[0], { x: 200,duration: 1,borderRadius: 100,rotation: 360 })}',
+  },
+  {
+    title: 'GSAP 기본 애니메이션',
+    code: 'onMounted(() => { gsap.to(imagesRefs.value[0], { x: 200,duration: 1,borderRadius: 100,rotation: 360 })}',
+  },
+  {
+    title: 'GSAP 기본 애니메이션',
+    code: 'onMounted(() => { gsap.to(imagesRefs.value[0], { x: 200,duration: 1,borderRadius: 100,rotation: 360 })}',
+  },
+  {
+    title: 'GSAP 기본 애니메이션',
+    code: 'onMounted(() => { gsap.to(imagesRefs.value[0], { x: 200,duration: 1,borderRadius: 100,rotation: 360 })}',
+  },
+  {
+    title: 'GSAP 기본 애니메이션',
+    code: 'onMounted(() => { gsap.to(imagesRefs.value[0], { x: 200,duration: 1,borderRadius: 100,rotation: 360 })}',
+  },
+]
 
 onMounted(() => {
   // activeIndex
@@ -38,7 +146,6 @@ onMounted(() => {
   gsap.to(imagesRefs.value[1], {
     x: 200,
     duration: 1,
-    borderRadius: 100,
     rotation: 360,
     scrollTrigger: {
       trigger: imagesRefs.value[1],
@@ -213,7 +320,7 @@ onMounted(() => {
     </section>
   </main>
 
-  <TheAside :activeIndex="activeIndex"></TheAside>
+  <TheAside :activeIndex="activeIndex" :steps="steps"></TheAside>
 </template>
 
 <style scoped>

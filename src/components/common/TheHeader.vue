@@ -46,5 +46,3 @@ onMounted(() => {
     </nav>
   </header>
 </template>
-
-<style scoped src="@css/layout.css"></style>

@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import './font.css';
+
 html,
 body {
   margin: 0;
@@ -227,5 +227,3 @@ address {
   color: inherit;
   letter-spacing: inherit;
 }
-
-
