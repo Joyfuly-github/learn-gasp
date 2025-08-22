@@ -70,3 +70,8 @@ aside {
   justify-content: center;
   align-items: center;
 }
+
+aside .number {
+  font-family: 'BMJUA';
+  color: #333;
+}
