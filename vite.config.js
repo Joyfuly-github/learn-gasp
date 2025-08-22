@@ -14,5 +14,6 @@ export default defineConfig({
       '@css': fileURLToPath(new URL('./src/assets/css', import.meta.url)),
     },
   },
-  base: process.env.NODE_ENV === 'production' ? '/learn-gasp/' : '/',
+  // base: process.env.NODE_ENV === 'production' ? '/learn-gasp/' : '/',
+  base: '/learn-gasp/',
 })
